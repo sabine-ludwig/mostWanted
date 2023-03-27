@@ -163,11 +163,27 @@ function mainMenu(person, people) {
     return mainMenu(person, people);
 }
 
+
+
 function displayPeople(displayTitle, peopleToDisplay) {
     const formatedPeopleDisplayText = peopleToDisplay.map(person => `${person.firstName} ${person.lastName}`).join('\n');
     alert(`${displayTitle}\n\n${formatedPeopleDisplayText}`);
 }
-
+function displayPersonInfo(person) {
+    let personInfo = "Person Info\n";
+    personInfo += `id: ${person.id}\n`
+    personInfo += `firstName: ${person.firstName}\n`
+    personInfo += `lastName: ${person.lastName}\n`
+    personInfo += `gender: ${person.gender}\n`
+    personInfo += `dob: ${person.dob}\n`
+    personInfo += `height: ${person.height}\n`
+    personInfo += `wieght: ${person.weight}\n`
+    personInfo += `eyeColor: ${person.eyeColor}\n`
+    personInfo += `occupation: ${person.occupation}\n`
+    personInfo += `parents: ${person.parents}\n`
+    personInfo += `currentSpouse: ${person.currentSpouse}\n`;
+    alert(personInfo)
+}
 function validatedPrompt(message, acceptableAnswers) {
     acceptableAnswers = acceptableAnswers.map(aa => aa.toLowerCase());
 
