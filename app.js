@@ -40,8 +40,7 @@ function searchPeopleDataSet(people) {
             results = searchByName(people);
             break;
         case 'traits':
-            //! TODO
-            // results = searchByTraits(people);
+            results = searchByTraits(people);
             break;
         default:
             return searchPeopleDataSet(people);
@@ -63,11 +62,10 @@ function searchByName(people) {
     const fullNameSearchResults = people.filter(person => (person.firstName.toLowerCase() === firstNameToSearchFor.toLowerCase() && person.lastName.toLowerCase() === lastNameToSearchFor.toLowerCase()));
     return fullNameSearchResults;
 }
-function searchByTrait(people) {
-    const traitToSearchFor = prompt('Plese enter the trait of the person you are looking for.')
+function searchByTraits(people) {
     const searchTypeChoice = validatedPrompt(
         'Please enter in what type of trait search you would like to preform',
-        ['height', 'weight', 'eyecolor']
+        ['gender', 'dob', 'height', 'weight', 'eyeColor', 'occupation']
     );
 
     let results = [];
@@ -84,7 +82,7 @@ function searchByTrait(people) {
         case 'weight':
             results = searchByWeight(people);
             break;
-        case 'eyecolor':
+        case 'eyeColor':
             results = searchByEyecolor(people);
             break;
         case 'occupation': 
@@ -114,6 +112,24 @@ function searchByHeight(people) {
     return heightFilterResults;
 }
 
+function searchByWeight(people) {
+    const weightSearch = prompt('Please enter weight of the person you are searching for.');
+    const weightSearchInt = parseInt(weightSearch);
+    const weightFilterResults = people.filter(person.weight === weightSearchInt);
+    return weightFilterResults;
+}
+
+function searchByEyeColor(people) {
+    const eyeColorSearch = prompt ('Please enter the eye color of the person you are searching for');
+    const eyeColorFilterResults = people.filter(person.eyeColor.toLowerCase() === eyeColorSearch.toLocaleLowerCase());
+    return eyeColorFilterResults;
+}
+
+function searchByOccupation(people) {
+    const occupationSearch = prompt ('Please enter the occupation of the person you are searching for');
+    const occupationFilterResults = people.filter(person.occupation.toLowerCase() === occupationSearch.toLocaleLowerCase());
+    return occupationFilterResults;
+}
 
 
 
