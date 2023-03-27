@@ -58,10 +58,49 @@ function searchById(people) {
 }
 
 function searchByName(people) {
-    const firstNameToSearchFor = prompt('Please enter the the first name of the person you are searching for.');
-    const lastNameToSearchFor = prompt('Please enter the the last name of the person you are searching for.');
+    const firstNameToSearchFor = prompt('Please enter the first name of the person you are searching for.');
+    const lastNameToSearchFor = prompt('Please enter the last name of the person you are searching for.');
     const fullNameSearchResults = people.filter(person => (person.firstName.toLowerCase() === firstNameToSearchFor.toLowerCase() && person.lastName.toLowerCase() === lastNameToSearchFor.toLowerCase()));
     return fullNameSearchResults;
+}
+function searchByTrait(people) {
+    const traitToSearchFor = prompt('Plese enter the trait of the person you are looking for.')
+    const searchTypeChoice = validatedPrompt(
+        'Please enter in what type of trait search you would like to preform',
+        ['height', 'weight', 'eyecolor']
+    );
+
+    let results = [];
+    switch (searchTypeChoice) {
+        case 'gender': 
+            results = searchByGender(people);
+            break;
+        case 'dob': 
+            results = searchByDob(people);
+            break;
+        case 'height':
+            results = searchByHeight(people);
+            break;
+        case 'weight':
+            results = searchByWeight(people);
+            break;
+        case 'eyecolor':
+            results = searchByEyecolor(people);
+            break;
+        case 'occupation': 
+            results = searchByOccupation(people);
+            break;
+        default:
+            return searchByTrait(people);
+    }
+    return results;
+}
+
+function searchByHeight(people) {
+    const heightSearch = prompt('Please enter height of the person you are searching for.');
+    const heightSearchInt = parseInt(heightSearch);
+    const heightFilterResults = people.filter(person.height === heightSearchInt);
+    return heightFilterResults;
 }
 
 function mainMenu(person, people) {
