@@ -163,27 +163,44 @@ function mainMenu(person, people) {
     return mainMenu(person, people);
 }
 
-
-
 function displayPeople(displayTitle, peopleToDisplay) {
     const formatedPeopleDisplayText = peopleToDisplay.map(person => `${person.firstName} ${person.lastName}`).join('\n');
     alert(`${displayTitle}\n\n${formatedPeopleDisplayText}`);
 }
 function displayPersonInfo(person) {
     let personInfo = "Person Info\n";
-    personInfo += `id: ${person.id}\n`
-    personInfo += `firstName: ${person.firstName}\n`
-    personInfo += `lastName: ${person.lastName}\n`
-    personInfo += `gender: ${person.gender}\n`
-    personInfo += `dob: ${person.dob}\n`
-    personInfo += `height: ${person.height}\n`
-    personInfo += `wieght: ${person.weight}\n`
-    personInfo += `eyeColor: ${person.eyeColor}\n`
-    personInfo += `occupation: ${person.occupation}\n`
-    personInfo += `parents: ${person.parents}\n`
-    personInfo += `currentSpouse: ${person.currentSpouse}\n`;
+    personInfo += `ID #: ${person.id}\n`
+    personInfo += `First Name: ${person.firstName}\n`
+    personInfo += `Last Name: ${person.lastName}\n`
+    personInfo += `Gender: ${person.gender}\n`
+    personInfo += `Date of Birth: ${person.dob}\n`
+    personInfo += `Height: ${person.height}\n`
+    personInfo += `Weight: ${person.weight}\n`
+    personInfo += `Eye Color: ${person.eyeColor}\n`
+    personInfo += `Occupation: ${person.occupation}\n`
+    personInfo += `Parents: ${person.parents}\n`
+    personInfo += `Current Spouse: ${person.currentSpouse}\n`;
     alert(personInfo)
 }
+
+function findPersonFamily(person, people) {
+    let familyInfo = "Family Info\n";
+    familyInfo += `Spouse: ${findSpouse(person)}`; 
+    familyInfo += 'Parents'; 
+    familyInfo += 'Children'
+    alert(familyInfo)
+}
+
+function findSpouse(person, people) {
+    let spouseName = people.filter(function(people){
+        if(people.id === person.currentSpouse) {
+            return true
+        }
+    })
+    return spouseName;
+}
+
+
 function validatedPrompt(message, acceptableAnswers) {
     acceptableAnswers = acceptableAnswers.map(aa => aa.toLowerCase());
 
