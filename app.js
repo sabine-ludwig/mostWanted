@@ -95,42 +95,41 @@ function searchByTraits(people) {
 }
 function searchByGender(people) {
     const genderSearch = prompt ('Please enter the gender of the person you are searching for');
-    const genderFilterResults = people.filter(person.gender.toLowerCase() === genderSearch.toLocaleLowerCase());
-    return genderFilterResults;
+    const genderFilterResults = people.filter(person => (person.gender.toLowerCase() === genderSearch.toLocaleLowerCase()));
+    return displayPeople('Results', genderFilterResults);
 }
 
 function searchByDob(people) {
     const dobSearch = ('Please enter the date of birth, formatted as 1/25/1929, you are searching for.');
-    const dobFilterResults = people.filter(person.dob === dobSearch);
-    return dobFilterResults;
+    const dobFilterResults = people.filter(person => (person.dob === dobSearch));
+    return displayPeople('Results', dobFilterResults);
 }
 
 function searchByHeight(people) {
     const heightSearch = prompt('Please enter height of the person you are searching for.');
     const heightSearchInt = parseInt(heightSearch);
-    const heightFilterResults = people.filter(person.height === heightSearchInt);
-    return heightFilterResults;
+    const heightFilterResults = people.filter(person => (person.height === heightSearchInt));
+    return displayPeople('Results', heightFilterResults);
 }
 
 function searchByWeight(people) {
     const weightSearch = prompt('Please enter weight of the person you are searching for.');
     const weightSearchInt = parseInt(weightSearch);
-    const weightFilterResults = people.filter(person.weight === weightSearchInt);
-    return weightFilterResults;
+    const weightFilterResults = people.filter(person => (person.weight === weightSearchInt));
+    return displayPeople('Results', weightFilterResults);
 }
 
 function searchByEyeColor(people) {
     const eyeColorSearch = prompt ('Please enter the eye color of the person you are searching for');
-    const eyeColorFilterResults = people.filter(person.eyeColor.toLowerCase() === eyeColorSearch.toLocaleLowerCase());
-    return eyeColorFilterResults;
+    const eyeColorFilterResults = people.filter(person => (person.eyeColor.toLowerCase() === eyeColorSearch.toLocaleLowerCase()));
+    return displayPeople('Results', eyeColorFilterResults);
 }
 
 function searchByOccupation(people) {
     const occupationSearch = prompt ('Please enter the occupation of the person you are searching for');
-    const occupationFilterResults = people.filter(person.occupation.toLowerCase() === occupationSearch.toLocaleLowerCase());
-    return occupationFilterResults;
+    const occupationFilterResults = people.filter(person => (person.occupation.toLowerCase() === occupationSearch.toLocaleLowerCase()));
+    return displayPeople('Results', occupationFilterResults);
 }
-
 
 
 function mainMenu(person, people) {
@@ -143,17 +142,17 @@ function mainMenu(person, people) {
     switch (mainMenuUserActionChoice) {
         case "info":
             //! TODO
-            // displayPersonInfo(person);
+            displayPersonInfo(person);
             break;
         case "family":
             //! TODO
-            // let personFamily = findPersonFamily(person, people);
-            // displayPeople('Family', personFamily);
+            let personFamily = findPersonFamily(person, people);
+            displayPeople('Family', personFamily);
             break;
         case "descendants":
             //! TODO
-            // let personDescendants = findPersonDescendants(person, people);
-            // displayPeople('Descendants', personDescendants);
+            let personDescendants = findPersonDescendants(person, people);
+            displayPeople('Descendants', personDescendants);
             break;
         case "quit":
             return;
