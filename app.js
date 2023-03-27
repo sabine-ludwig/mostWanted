@@ -95,6 +95,11 @@ function searchByTrait(people) {
     }
     return results;
 }
+function searchByGender(people) {
+    const genderSearch = prompt ('Please enter the gender of the person you are searching for')
+    const genderFilterResults = people.filter(person.gender.toLowerCase() === genderSearch.toLocaleLowerCase());
+    return genderFilterResults
+}
 
 function searchByHeight(people) {
     const heightSearch = prompt('Please enter height of the person you are searching for.');
@@ -102,6 +107,8 @@ function searchByHeight(people) {
     const heightFilterResults = people.filter(person.height === heightSearchInt);
     return heightFilterResults;
 }
+
+
 
 function mainMenu(person, people) {
 
