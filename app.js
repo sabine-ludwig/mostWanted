@@ -168,8 +168,7 @@ function displayPeople(displayTitle, peopleToDisplay) {
     alert(`${displayTitle}\n\n${formatedPeopleDisplayText}`);
 }
 function displayPersonInfo(person) {
-    let personInfo = "Person Info\n";
-    personInfo += `ID #: ${person.id}\n`
+    let personInfo = "Person Info:\n";
     personInfo += `First Name: ${person.firstName}\n`
     personInfo += `Last Name: ${person.lastName}\n`
     personInfo += `Gender: ${person.gender}\n`
@@ -178,13 +177,11 @@ function displayPersonInfo(person) {
     personInfo += `Weight: ${person.weight}\n`
     personInfo += `Eye Color: ${person.eyeColor}\n`
     personInfo += `Occupation: ${person.occupation}\n`
-    personInfo += `Parents: ${person.parents}\n`
-    personInfo += `Current Spouse: ${person.currentSpouse}\n`;
     alert(personInfo)
 }
 
 function findPersonFamily(person, people) {
-    let familyInfo = "Family Info\n";
+    let familyInfo = "Family Info:\n";
     let spouse = findSpouse(person, people)
     familyInfo += `Spouse: ${spouse.firstName} ${spouse.lastName}\n`;
     let parents = findParents(person, people)
