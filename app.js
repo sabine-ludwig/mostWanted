@@ -207,14 +207,14 @@ function findSpouse(person = {}, people = []) {
 
 function findParents(person, people) {
     let parentName = people.filter(function(element) {
-        if(element.id === person.parents) {
+        if(person.parents.includes(element.id)) {
             return true
         }
         else {
             return false
         }
     })
-    return parentName[0,1]
+    return parentName[0]
 }
 
 function validatedPrompt(message, acceptableAnswers) {
