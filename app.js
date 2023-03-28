@@ -147,7 +147,7 @@ function mainMenu(person, people) {
         case "family":
             //! TODO
             let personFamily = findPersonFamily(person, people);
-            displayPeople('Family', personFamily);
+            // displayPeople('Family', personFamily);
             break;
         case "descendants":
             //! TODO
