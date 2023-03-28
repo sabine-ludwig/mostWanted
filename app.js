@@ -153,6 +153,7 @@ function mainMenu(person, people) {
             //! TODO
             let personDescendants = findPersonDescendants(person, people);
             displayPeople('Descendants', personDescendants);
+            alert(personDescendants)
             break;
         case "quit":
             return;
@@ -246,6 +247,25 @@ function findChildren(person, people) {
         }
     })
     return childrenArray
+}
+
+function findPersonDescendants(person, people){
+    let personId = person.id
+    let descendantsFullName = ''
+    let personDescendants = people.filter(function(person) {
+        if (person.parents.includes(personId)) {
+            return true
+        }
+    })
+    if (personDescendants[0] === undefined) {
+        descendantsFullName = `${person.firstName} ${person.lastName} has no known descendants.`
+    }
+    else {
+        for (let i=0; i < personDescendants.length; i++) {
+            descendantsFullName += `${person.firstName} ${person.lastName} ${i+1} descendant: ${personDescendants.firstName[i]} ${personDescendants.lastName[i]}\n`
+        }
+    }
+    return descendantsFullName
 }
 
 function validatedPrompt(message, acceptableAnswers) {
