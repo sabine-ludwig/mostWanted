@@ -83,13 +83,13 @@ function searchByTraits(people) {
             results = searchByWeight(people);
             break;
         case 'eyeColor':
-            results = searchByEyecolor(people);
+            results = searchByEyeColor(people);
             break;
         case 'occupation': 
             results = searchByOccupation(people);
             break;
         default:
-            return searchByTrait(people);
+            return searchByTraits(people);
     }
     return results;
 }
@@ -185,21 +185,37 @@ function displayPersonInfo(person) {
 
 function findPersonFamily(person, people) {
     let familyInfo = "Family Info\n";
-    familyInfo += `Spouse: ${findSpouse(person)}`; 
-    familyInfo += 'Parents'; 
-    familyInfo += 'Children'
+    let spouse = findSpouse(person, people)
+    familyInfo += `Spouse: ${spouse.firstName}\n`;
+    let parents = findParents(person, people)
+    familyInfo += `Parents: ${parents.firstName} \n`; 
+    familyInfo += 'Descendants'
     alert(familyInfo)
 }
 
-function findSpouse(person, people) {
-    let spouseName = people.filter(function(people){
-        if(people.id === person.currentSpouse) {
+function findSpouse(person = {}, people = []) {
+    let spouseName = people.filter(function(element){
+        if(element.id === person.currentSpouse) {
             return true
         }
+        else {
+            return false
+        }
     })
-    return spouseName;
+    return spouseName[0];
 }
 
+function findParents(person, people) {
+    let parentName = people.filter(function(element) {
+        if(element.id === person.parents) {
+            return true
+        }
+        else {
+            return false
+        }
+    })
+    return parentName[0,1]
+}
 
 function validatedPrompt(message, acceptableAnswers) {
     acceptableAnswers = acceptableAnswers.map(aa => aa.toLowerCase());
