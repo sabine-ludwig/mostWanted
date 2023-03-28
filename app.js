@@ -186,10 +186,19 @@ function displayPersonInfo(person) {
 function findPersonFamily(person, people) {
     let familyInfo = "Family Info\n";
     let spouse = findSpouse(person, people)
-    familyInfo += `Spouse: ${spouse.firstName}\n`;
+    familyInfo += `Spouse: ${spouse.firstName} ${spouse.lastName}\n`;
     let parents = findParents(person, people)
-    familyInfo += `Parents: ${parents.firstName} \n`; 
-    familyInfo += 'Descendants'
+    for (let i=0; i < parents.length; i++){ 
+        familyInfo += `Parent: ${parents[i].firstName} ${parents[i].lastName}\n`;
+    }
+    let siblings = findSiblings(person, people)
+    for (let i=0; i < siblings.length; i++){ 
+        familyInfo += `Siblings: ${siblings[i].firstName} ${siblings[i].lastName}\n`;
+    }
+    let children = findChildren(person, people)
+    for (let i=0; i < children.length; i++){ 
+        familyInfo += `Children: ${children[i].firstName} ${children[i].lastName}\n`;
+    }
     alert(familyInfo)
 }
 
@@ -206,7 +215,7 @@ function findSpouse(person = {}, people = []) {
 }
 
 function findParents(person, people) {
-    let parentName = people.filter(function(element) {
+    let parentArray = people.filter(function(element) {
         if(person.parents.includes(element.id)) {
             return true
         }
@@ -214,7 +223,32 @@ function findParents(person, people) {
             return false
         }
     })
-    return parentName[0]
+    return parentArray
+}
+
+function findSiblings(person, people) {
+    let siblingArray = people.filter(function(element) {
+        for (let i = 0; i < people.length; i++){
+        if(element.parents[i] == person.parents) {
+            return true
+            }
+            else {
+                return false
+            }
+        }
+    })
+    return siblingArray
+}
+
+function findChildren(person, people) {
+    let childrenArray = people.filter(function(element) {
+        for (let i = 0; i < people.length; i++){
+        if(element.parents[i] == person.id) {
+            return true
+            }
+        }
+    })
+    return childrenArray
 }
 
 function validatedPrompt(message, acceptableAnswers) {
