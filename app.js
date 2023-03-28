@@ -151,8 +151,7 @@ function mainMenu(person, people) {
             break;
         case "descendants":
             //! TODO
-            let personDescendants = findPersonDescendants(person, people);
-            displayPeople('Descendants', personDescendants);
+            let personDescendants = findPersonDescendants(person[0], people);
             alert(personDescendants)
             break;
         case "quit":
@@ -250,23 +249,42 @@ function findChildren(person, people) {
 }
 
 function findPersonDescendants(person, people){
-    let personId = person.id
-    let descendantsFullName = ''
+    let personId = person.id;
+    let descendantsFullName = '';
     let personDescendants = people.filter(function(person) {
         if (person.parents.includes(personId)) {
-            return true
+            return true;
         }
     })
     if (personDescendants[0] === undefined) {
         descendantsFullName = `${person.firstName} ${person.lastName} has no known descendants.`
     }
-    else {
-        for (let i=0; i < personDescendants.length; i++) {
+        else{
+            for (let i=0; i < personDescendants.length; i++) {
             descendantsFullName += `${person.firstName} ${person.lastName} ${i+1} descendant: ${personDescendants.firstName[i]} ${personDescendants.lastName[i]}\n`
+            }
         }
-    }
-    return descendantsFullName
+    return descendantsFullName;
 }
+// function findPersonDescendants(person, people) {
+//     // let personDescendants = `Descendants: ${person.descendants}\n`;
+//     // alert(personDescendants);
+//     let personId = person.id;
+//     let personDescendantsFullNames = "";
+//     let personDescendants = people.filter(function(person) {
+//         if(person.parents.includes(personId)) {
+//             return true;
+//         }
+//     })
+//     if(personDescendants[0] === undefined) {
+//         personDescendantsFullNames = `${person.firstName} ${person.lastName} does not have any descendants.`
+//     } else {
+//         for (let i = 0; i < personDescendants.length; i++) {
+//         personDescendantsFullNames += `${person.firstName} ${person.lastName} ${i+1} descendant: ${personDescendants[i].firstName} ${personDescendants[i].lastName} \n`
+//         }
+//     }
+//     return personDescendantsFullNames;
+// }
 
 function validatedPrompt(message, acceptableAnswers) {
     acceptableAnswers = acceptableAnswers.map(aa => aa.toLowerCase());
