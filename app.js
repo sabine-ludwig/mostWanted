@@ -13,7 +13,7 @@ function runSearchAndMenu(people) {
     const searchResults = searchPeopleDataSet(people);
 
     if (searchResults.length > 1) {
-        DisplayPeople('Search Results', searchResults);
+        displayPeople('Search Results', searchResults);
     }
     else if (searchResults.length === 1) {
         const person = searchResults[0];
@@ -45,7 +45,6 @@ function searchPeopleDataSet(people) {
         default:
             return searchPeopleDataSet(people);
     }
-
     return results;
 }
 
@@ -62,6 +61,7 @@ function searchByName(people) {
     const fullNameSearchResults = people.filter(person => (person.firstName.toLowerCase() === firstNameToSearchFor.toLowerCase() && person.lastName.toLowerCase() === lastNameToSearchFor.toLowerCase()));
     return fullNameSearchResults;
 }
+
 function searchByTraits(people) {
     const searchTypeChoice = validatedPrompt(
         'Please enter in what type of trait you would like to search:',
@@ -71,46 +71,50 @@ function searchByTraits(people) {
     let results = [];
     switch (searchTypeChoice) {
         case 'gender': 
-            results = searchByGender(people);
-            
+            results = searchByGender(people);            
             break;
         case 'dob': 
-            results = searchByDob(people);
-            
+            results = searchByDob(people);  
             break;
         case 'height':
             results = searchByHeight(people);
-            
             break;
         case 'weight':
             results = searchByWeight(people);
-            
             break;
         case 'eyecolor':
             results = searchByEyeColor(people);
-            
             break;
         case 'occupation': 
             results = searchByOccupation(people);
-            
             break;
         default:
-            return searchByTraits(people);
+            return searchByTraits(results);
     }
-    return narrowChoice(results, people);
+    return narrowChoice(results);
 }
 
 function searchByGender(people) {
     const genderSearch = prompt ('Please enter the gender of the person you are searching for');
     const genderFilterResults = people.filter(person => (person.gender.toLowerCase() === genderSearch.toLowerCase()));
-    displayPeople('Results', genderFilterResults);
+    if(genderFilterResults.length === 0) {
+        alert("No results matching this search.")
+    }
+    else{
+        displayPeople('Results', genderFilterResults);
+    }
     return (genderFilterResults)
 }
 
 function searchByDob(people) {
     const dobSearch = prompt ('Please enter the date of birth, formatted as MM/DD/YYYY, you are searching for.');
     const dobFilterResults = people.filter(person => (person.dob === dobSearch));
-    displayPeople('Results', dobFilterResults);
+    if(dobFilterResults.length === 0) {
+        alert("No results matching this search.")
+    }
+    else{
+        displayPeople('Results', dobFilterResults);
+    }
     return (dobFilterResults)
 }
 
@@ -118,7 +122,12 @@ function searchByHeight(people) {
     const heightSearch = prompt('Please enter height of the person you are searching for.');
     const heightSearchInt = parseInt(heightSearch);
     const heightFilterResults = people.filter(person => (person.height === heightSearchInt));
-    displayPeople('Results', heightFilterResults);
+    if(heightFilterResults.length === 0) {
+        alert("No results matching this search.")
+    }
+    else{
+        displayPeople('Results', heightFilterResults);
+    }
     return (heightFilterResults)
 }
 
@@ -126,7 +135,12 @@ function searchByWeight(people) {
     const weightSearch = prompt('Please enter weight of the person you are searching for.');
     const weightSearchInt = parseInt(weightSearch);
     const weightFilterResults = people.filter(person => (person.weight === weightSearchInt));
-    displayPeople('Results', weightFilterResults);
+    if(weightFilterResults.length === 0) {
+        alert("No results matching this search.")
+    }
+    else{
+        displayPeople('Results', weightFilterResults);
+    }
     return (weightFilterResults)
 }
 
@@ -134,7 +148,12 @@ function searchByEyeColor(people) {
     const eyeColorSearch = validatedPrompt ('Please enter the eye color of the person you are searching for',
     ['brown', 'black', 'hazel', 'blue', 'green']);
     const eyeColorFilterResults = people.filter(person => (person.eyeColor.toLowerCase() === eyeColorSearch.toLowerCase()));
-    displayPeople('Results', eyeColorFilterResults);
+    if(eyeColorFilterResults.length === 0) {
+        alert("No results matching this search.")
+    }
+    else{
+        displayPeople('Results', eyeColorFilterResults);
+    }
     return (eyeColorFilterResults)
 }
 
@@ -142,26 +161,29 @@ function searchByOccupation(people) {
     const occupationSearch = validatedPrompt ('Please enter the occupation of the person you are searching for',
     ['programmer', 'assistant', 'landscaper', 'nurse', 'student', 'architect', 'doctor', 'politician']);
     const occupationFilterResults = people.filter(person => (person.occupation.toLowerCase() === occupationSearch.toLowerCase()));
-    displayPeople('Results', occupationFilterResults);
+    if(occupationFilterResults.length === 0) {
+        alert("No results matching this search.")
+    }
+    else{
+        displayPeople('Results', occupationFilterResults);
+    }
     return (occupationFilterResults)
 }
 
-function narrowChoice(results, people){
+function narrowChoice(results){
     if(results.length <= 1){
         alert("No more results to narrow")
-        exitOrRestart(people)
+        return(results)
     }
-    userChoice = validatedPrompt("Would you like to narrow your results by another trait?",['yes', 'no']).toLowerCase()
-    if(userChoice === 'yes'){
-        searchByTraits(results);
+    else{
+        userChoice = validatedPrompt("Would you like to narrow your results by another trait?",['yes', 'no']).toLowerCase()
+        if(userChoice === 'yes'){
+            return searchByTraits(results);
+        }
+        else{
+            return results
+        }
     }
-    if(userChoice === 'no' && filteredPeople.length === 1){
-        exitOrRestart(people);
-    }
-    if(userChoice === 'no' && filteredPeople.length > 1){
-        exitOrRestart(people);
-    }
-    return(results)
 }
 
 function mainMenu(person, people) {
