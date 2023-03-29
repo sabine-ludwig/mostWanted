@@ -65,7 +65,7 @@ function searchByName(people) {
 function searchByTraits(people) {
     const searchTypeChoice = validatedPrompt(
         'Please enter in what type of trait you would like to search:',
-        ['gender', 'dob', 'height', 'weight', 'eyeColor', 'occupation']
+        ['gender', 'dob', 'height', 'weight', 'eyecolor', 'occupation']
     );
 
     let results = [];
@@ -82,7 +82,7 @@ function searchByTraits(people) {
         case 'weight':
             results = searchByWeight(people);
             break;
-        case 'eyeColor':
+        case 'eyecolor':
             results = searchByEyeColor(people);
             break;
         case 'occupation': 
@@ -95,12 +95,12 @@ function searchByTraits(people) {
 }
 function searchByGender(people) {
     const genderSearch = prompt ('Please enter the gender of the person you are searching for');
-    const genderFilterResults = people.filter(person => (person.gender.toLowerCase() === genderSearch.toLocaleLowerCase()));
+    const genderFilterResults = people.filter(person => (person.gender.toLowerCase() === genderSearch.toLowerCase()));
     return displayPeople('Results', genderFilterResults);
 }
 
 function searchByDob(people) {
-    const dobSearch = ('Please enter the date of birth, formatted as 1/25/1929, you are searching for.');
+    const dobSearch = prompt ('Please enter the date of birth, formatted as MM/DD/YYYY, you are searching for.');
     const dobFilterResults = people.filter(person => (person.dob === dobSearch));
     return displayPeople('Results', dobFilterResults);
 }
@@ -121,13 +121,13 @@ function searchByWeight(people) {
 
 function searchByEyeColor(people) {
     const eyeColorSearch = prompt ('Please enter the eye color of the person you are searching for');
-    const eyeColorFilterResults = people.filter(person => (person.eyeColor.toLowerCase() === eyeColorSearch.toLocaleLowerCase()));
+    const eyeColorFilterResults = people.filter(person => (person.eyeColor.toLowerCase() === eyeColorSearch.toLowerCase()));
     return displayPeople('Results', eyeColorFilterResults);
 }
 
 function searchByOccupation(people) {
     const occupationSearch = prompt ('Please enter the occupation of the person you are searching for');
-    const occupationFilterResults = people.filter(person => (person.occupation.toLowerCase() === occupationSearch.toLocaleLowerCase()));
+    const occupationFilterResults = people.filter(person => (person.occupation.toLowerCase() === occupationSearch.toLowerCase()));
     return displayPeople('Results', occupationFilterResults);
 }
 
