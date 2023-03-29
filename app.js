@@ -94,9 +94,19 @@ function searchByTraits(people) {
     return results;
 }
 function searchByGender(people) {
-    const genderSearch = prompt ('Please enter the gender of the person you are searching for');
-    const genderFilterResults = people.filter(person => (person.gender.toLowerCase() === genderSearch.toLowerCase()));
-    return displayPeople('Results', genderFilterResults);
+    let genderSearch = prompt ('Please enter the gender of the person you are searching for');
+    let searchPerson = people.filter(function(person){
+        if(person.height === searchUserChoice){
+            return true;
+        }
+    })
+        if(searchPerson === undefined || searchPerson.length === 0){
+            alert("No results found")
+            return searchByTraits(people);
+        }
+        return searchPerson
+    // const genderFilterResults = people.filter(person => (person.gender.toLowerCase() === genderSearch.toLowerCase()));
+    // return displayPeople('Results', genderFilterResults);
 }
 
 function searchByDob(people) {
@@ -120,13 +130,15 @@ function searchByWeight(people) {
 }
 
 function searchByEyeColor(people) {
-    const eyeColorSearch = prompt ('Please enter the eye color of the person you are searching for');
+    const eyeColorSearch = validatedPrompt ('Please enter the eye color of the person you are searching for',
+    ['brown', 'black', 'hazel', 'blue', 'green']);
     const eyeColorFilterResults = people.filter(person => (person.eyeColor.toLowerCase() === eyeColorSearch.toLowerCase()));
     return displayPeople('Results', eyeColorFilterResults);
 }
 
 function searchByOccupation(people) {
-    const occupationSearch = prompt ('Please enter the occupation of the person you are searching for');
+    const occupationSearch = validatedPrompt ('Please enter the occupation of the person you are searching for',
+    ['programmer', 'assistant', 'landscaper', 'nurse', 'student', 'architect', 'doctor', 'politician']);
     const occupationFilterResults = people.filter(person => (person.occupation.toLowerCase() === occupationSearch.toLowerCase()));
     return displayPeople('Results', occupationFilterResults);
 }
@@ -266,53 +278,90 @@ function findPersonDescendants(person, people) {
     return descendantsFullName;
 }
 
-function multiTraitSearch (people) {
-    const searchUserChoice = validatedPrompt(
-        'Please enter in what type of trait you would like to search:',
-        ['gender', 'dob', 'height', 'weight', 'eyeColor', 'occupation']
-        );
+// function multiTraitSearch (people) {
+//     const searchUserChoice = validatedPrompt(
+//         'Please enter in what type of trait you would like to search:',
+//         ['gender', 'dob', 'height', 'weight', 'eyeColor', 'occupation']
+//         );
 
-        let filteredPeople;
-    switch(searchUserChoice) {
-        case 'gender': 
-            filteredPeople = genderSearch(people);
-            displayPeople(filteredPeople);
-            break;
-        case 'dob': 
-            filteredPeople = dobSearch(people);
-            displayPeople(filteredPeople);
-            break;
-        case 'height':
-            filteredPeople = heightSearch(people);
-            displayPeople(filteredPeople);
-            break;
-        case 'weight':
-            filteredPeople = weightSearch(people);
-            displayPeople(filteredPeople);
-            break;
-        case 'eyeColor':
-            filteredPeople = eyeColorSearch(people);
-            displayPeople(filteredPeople);
-            break;
-        case 'occupation': 
-            filteredPeople = occupationSearch(people);
-            displayPeople(filteredPeople);
-            break;
-        default:
-            alert("Invalid trait. Please enter a valid trait.");
-            searchUserChoice(people);
-            break;
-    }
+//         let filteredPeople;
+//     switch(searchUserChoice) {
+//         case 'gender': 
+//             filteredPeople = genderSearch(people);
+//             displayPeople(filteredPeople);
+//             break;
+//         case 'dob': 
+//             filteredPeople = dobSearch(people);
+//             displayPeople(filteredPeople);
+//             break;
+//         case 'height':
+//             filteredPeople = heightSearch(people);
+//             displayPeople(filteredPeople);
+//             break;
+//         case 'weight':
+//             filteredPeople = weightSearch(people);
+//             displayPeople(filteredPeople);
+//             break;
+//         case 'eyeColor':
+//             filteredPeople = eyeColorSearch(people);
+//             displayPeople(filteredPeople);
+//             break;
+//         case 'occupation': 
+//             filteredPeople = occupationSearch(people);
+//             displayPeople(filteredPeople);
+//             break;
+//         default:
+//             alert("Invalid trait. Please enter a valid trait.");
+//             searchUserChoice(people);
+//             break;
+//     }
 
-    searchUserChoice = prompt("Search by another trait? Yes or No").toLowerCase();
-
+//     searchUserChoice = prompt("Search by another trait? Yes or No").toLowerCase();
+//     if(searchUserChoice === "yes"){
+//         multiTraitSearch(filteredPeople, people);
+//     }
+//     if(searchUserChoice === "no" && filteredPeople.length === 1){
+//         displayPeople(filteredPeople);
+//         alert("Search by full name.");
+//         app(people)
+//     }
+//     if(searchUserChoice === "no" && filteredPeople.length > 1){
+//         displayPeople(filteredPeople);
+//         alert("Search by full name.");
+//         app(people)
+//     }
     
+//     function genderSearch(people){
+//         let searchUserChoice = prompt ('Please enter the gender of the person you are searching for');
+        
+//     }
 
-//gender: ['male', 'female']
-//eyecolor: ['brown', 'black', 'hazel', 'blue', 'green']
-//occupation: ['programmer', 'assistant', 'landscaper', 'nurse', 'student', 'architect', 'doctor', 'politician']
+//     function dobSearch(people){
+//         let searchUserChoice = prompt ('Please enter the dob of the person you are searching for');
 
-    }
+//     }
+
+//     function heightSearch(people){
+//         let searchUserChoice = prompt ('Please enter the height of the person you are searching for');
+
+//     }
+
+//     function weightSearch(people){
+//         let searchUserChoice = prompt ('Please enter the weight of the person you are searching for');
+
+//     }
+
+//     function eyeColorSearch(people){
+//         let searchUserChoice = prompt ('Please enter the eyecolor of the person you are searching for');
+
+//     }
+
+//     function occupationSearch(people){
+//         let searchUserChoice = prompt ('Please enter the occupation of the person you are searching for');
+
+//     }
+// }
+
 
 function validatedPrompt(message, acceptableAnswers) {
     acceptableAnswers = acceptableAnswers.map(aa => aa.toLowerCase());
