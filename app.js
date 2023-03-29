@@ -64,7 +64,7 @@ function searchByName(people) {
 }
 function searchByTraits(people) {
     const searchTypeChoice = validatedPrompt(
-        'Please enter in what type of trait search you would like to preform',
+        'Please enter in what type of trait you would like to search:',
         ['gender', 'dob', 'height', 'weight', 'eyeColor', 'occupation']
     );
 
@@ -265,6 +265,54 @@ function findPersonDescendants(person, people) {
         }
     return descendantsFullName;
 }
+
+function multiTraitSearch (people) {
+    const searchUserChoice = validatedPrompt(
+        'Please enter in what type of trait you would like to search:',
+        ['gender', 'dob', 'height', 'weight', 'eyeColor', 'occupation']
+        );
+
+        let filteredPeople;
+    switch(searchUserChoice) {
+        case 'gender': 
+            filteredPeople = genderSearch(people);
+            displayPeople(filteredPeople);
+            break;
+        case 'dob': 
+            filteredPeople = dobSearch(people);
+            displayPeople(filteredPeople);
+            break;
+        case 'height':
+            filteredPeople = heightSearch(people);
+            displayPeople(filteredPeople);
+            break;
+        case 'weight':
+            filteredPeople = weightSearch(people);
+            displayPeople(filteredPeople);
+            break;
+        case 'eyeColor':
+            filteredPeople = eyeColorSearch(people);
+            displayPeople(filteredPeople);
+            break;
+        case 'occupation': 
+            filteredPeople = occupationSearch(people);
+            displayPeople(filteredPeople);
+            break;
+        default:
+            alert("Invalid trait. Please enter a valid trait.");
+            searchUserChoice(people);
+            break;
+    }
+
+    searchUserChoice = prompt("Search by another trait? Yes or No").toLowerCase();
+
+    
+
+//gender: ['male', 'female']
+//eyecolor: ['brown', 'black', 'hazel', 'blue', 'green']
+//occupation: ['programmer', 'assistant', 'landscaper', 'nurse', 'student', 'architect', 'doctor', 'politician']
+
+    }
 
 function validatedPrompt(message, acceptableAnswers) {
     acceptableAnswers = acceptableAnswers.map(aa => aa.toLowerCase());
