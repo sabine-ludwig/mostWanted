@@ -95,7 +95,7 @@ function searchByTraits(people) {
 }
 
 function searchByGender(people) {
-    const genderSearch = prompt ('Please enter the gender of the person you are searching for');
+    const genderSearch = validatedPrompt ('Please enter the gender of the person you are searching for',['male', 'female']);
     const genderFilterResults = people.filter(person => (person.gender.toLowerCase() === genderSearch.toLowerCase()));
     if(genderFilterResults.length === 0) {
         alert("No results matching this search.")

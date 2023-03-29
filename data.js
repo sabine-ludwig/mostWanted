@@ -285,7 +285,7 @@ const data = [
 		"firstName": "Joey",
 		"lastName": "Madden",
 		"gender": "female",
-		"dob": "2/02/1987",
+		"dob": "2/2/1987",
 		"height": 67,
 		"weight": 100,
 		"eyeColor": "blue",
