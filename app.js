@@ -96,7 +96,7 @@ function searchByTraits(people) {
 function searchByGender(people) {
     let genderSearch = prompt ('Please enter the gender of the person you are searching for');
     let searchPerson = people.filter(function(person){
-        if(person.height === searchUserChoice){
+        if(person.height === genderSearch){
             return true;
         }
     })
