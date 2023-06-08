@@ -236,20 +236,29 @@ function displayPersonInfo(person) {
 
 function findPersonFamily(person, people) {
     let familyInfo = "Family Info:\n";
-    let spouse = findSpouse(person, people)
-    familyInfo += `Spouse: ${spouse.firstName} ${spouse.lastName}\n`;
-    let parents = findParents(person, people)
-    for (let i=0; i < parents.length; i++){ 
-        familyInfo += `Parent: ${parents[i].firstName} ${parents[i].lastName}\n`;
+    if(person.currentSpouse !== null){
+        let spouse = findSpouse(person, people)
+        familyInfo += `Spouse: ${spouse.firstName} ${spouse.lastName}\n`;    
     }
-    let siblings = findSiblings(person, people)
-    for (let i=0; i < siblings.length; i++){ 
+    if(person.parents.length !== 0) {
+        let parents = findParents(person, people)
+        for (let i=0; i < parents.length; i++){ 
+        familyInfo += `Parent: ${parents[i].firstName} ${parents[i].lastName}\n`;
+    }   
+    }
+    if(person.siblings.length !== 0){
+        let siblings = findSiblings(person, people)
+        for (let i=0; i < siblings.length; i++){ 
         familyInfo += `Siblings: ${siblings[i].firstName} ${siblings[i].lastName}\n`;
     }
-    let children = findChildren(person, people)
-    for (let i=0; i < children.length; i++){ 
+    }
+    if(person.children.length !== 0){
+        let children = findChildren(person, people)
+        for (let i=0; i < children.length; i++){ 
         familyInfo += `Children: ${children[i].firstName} ${children[i].lastName}\n`;
     }
+    }
+    
     alert(familyInfo)
 }
 
@@ -279,14 +288,9 @@ function findParents(person, people) {
 
 function findSiblings(person, people) {
     let siblingArray = people.filter(function(element) {
-        for (let i = 0; i < people.length; i++){
-        if(element.parents[i] == person.parents) {
+        if(element.parents[0] === person.parents[0] || element.parents[1] === person.parents[1]) {
             return true
             }
-            else {
-                return false
-            }
-        }
     })
     return siblingArray
 }
